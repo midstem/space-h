@@ -14,10 +14,12 @@ app.use('*', prettyJSON())
 
 app.get(Routes.HOME, Controllers.HomeController.get)
 
+app.get(Routes.TODO, Controllers.TodoController.get)
+
 app.post(
-  Routes.HOME,
+  Routes.TODO,
   zValidator('form', todoSchema),
-  Controllers.HomeController.post
+  Controllers.TodoController.post
 )
 
 export default app
