@@ -1,1 +1,2 @@
-# space-h is a first bun project
+# SpaceH is our first commercial project
+## It is written on Bun runtime (Node.js faster replacement)
