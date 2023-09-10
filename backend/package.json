@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "s": "bun run --hot src/index.ts"
+    "s": "bun run --hot src/app.ts",
+    "start": "bun run src/app.ts"
   },
   "dependencies": { "hono": "^3.5.8" },
   "devDependencies": {
