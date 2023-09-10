@@ -15,6 +15,7 @@
     "moduleDetection": "force",
 
     "jsx": "react-jsx", // support JSX
+    "jsxImportSource": "hono/jsx",
     "allowJs": true, // allow importing `.js` from `.ts`
     "esModuleInterop": true, // allow default imports for CommonJS modules
 
