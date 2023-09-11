@@ -2,7 +2,7 @@ import { Context } from 'hono'
 import { Todo } from './schema'
 
 // Database :)
-const todos: Todo[] = []
+const todos: Todo[] = [{ id: '1', title: 'Todo 1'}, { id: '2', title: 'Todo 1'}]
 
 // curl http://localhost:3000/todo
 export const get = async (c: Context) => {

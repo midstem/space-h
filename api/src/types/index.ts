@@ -1,4 +1,4 @@
 export enum Routes {
   HOME = '/',
-  TODO = '/todo',
+  TODO = '/todos',
 }
