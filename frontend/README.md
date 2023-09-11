@@ -1,5 +1,17 @@
 # React + TypeScript + Vite
 
+## For development:
+
+`bun i` to install all dependencies
+
+`bun s` to run development server
+
+## For production:
+
+`bun i` to install all dependencies
+
+`bun run build` to buid all artifacts to `dist` directory
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

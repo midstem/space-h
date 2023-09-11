@@ -2,8 +2,14 @@
 
 Bun is a faster replacement of Note.js
 
-## How to spin up locally?
+## For development:
 
-`bun i`
+`bun i` to install all dependencies
 
-`bun s`
+`bun s` to start development server with hot reload
+
+## For production:
+
+`bun i` to install all dependencies
+
+`bun start` to start the app on production server
