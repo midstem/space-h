@@ -8,8 +8,9 @@ First, run the development server:
 bun i # to install dependencies
 
 bun s # to run development server locally
-# or
-yarn dev
+
+bun run build # to generate static files into our directory for production
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
