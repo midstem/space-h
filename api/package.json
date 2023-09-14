@@ -2,9 +2,9 @@
   "name": "api",
   "version": "1.0.0",
   "scripts": {
-    "dev": "bun run --watch src/app.tsx",
-    "s": "bun run --watch src/app.tsx",
-    "start": "bun run src/app.tsx",
+    "dev": "bun run --watch src/app.ts",
+    "s": "bun run --watch src/app.ts",
+    "start": "bun run src/app.ts",
     "lint:fix": "eslint --fix"
   },
   "dependencies": {

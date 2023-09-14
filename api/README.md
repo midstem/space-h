@@ -13,3 +13,11 @@ bun s
 ```
 
 Open http://localhost:8080/ with your browser to see the result.
+
+## Docker
+
+```bash
+docker build -t spaceh-api .
+
+docker run -p 8080:8080 spaceh-api
+```

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { logger } from '../../helpers'
 
 const todos = [
   { id: '1', title: 'Todo 1' },
@@ -10,7 +11,11 @@ export const get = async (req: Request, res: Response) => {
 }
 
 export const post = async (req: Request, res: Response) => {
-  todos.push(req.body)
+  try {
+    todos.push(req.body)
+  } catch (error) {
+    logger.error(error)
+  }
 
   return res.send({
     message: 'Todo created',
