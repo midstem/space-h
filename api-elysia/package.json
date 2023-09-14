@@ -1,0 +1,19 @@
+{
+  "name": "api1",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/app.tsx",
+    "s": "bun run --watch src/app.tsx",
+    "start": "bun run src/app.tsx"
+  },
+  "dependencies": {
+    "@elysiajs/html": "^0.6.5",
+    "@elysiajs/swagger": "^0.6.2",
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "module": "src/app.js"
+}
