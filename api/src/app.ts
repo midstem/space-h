@@ -1,12 +1,16 @@
 import express from 'express'
+import swaggerUi from 'swagger-ui-express'
 import * as Controllers from './controllers'
 import { Routes } from './types'
 import { logger, validate } from './helpers'
 import * as Schemas from './schemas'
 
+const swaggerFile = require('../swagger-output.json')
+
 const app = express()
 
 app.use(express.json())
+app.use(Routes.DOC, swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.get(Routes.HOME, Controllers.HomeController.get)
 
