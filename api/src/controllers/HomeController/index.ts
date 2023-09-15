@@ -1,10 +1,11 @@
-import express, { Request, Response } from 'express'
-import { Routes } from 'src/types'
+import { Request, Response, Router } from 'express'
 
-export const router = express.Router()
+const router = Router()
 
 const get = (req: Request, res: Response) => {
-  return res.send('Hello express!')
+  res.send('Hello express!')
 }
 
-router.get(Routes.HOME, get)
+router.get('/', get)
+
+export default router

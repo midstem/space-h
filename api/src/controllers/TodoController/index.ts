@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express'
+import { Request, Response, Router } from 'express'
 import { Routes } from 'src/types'
 import * as Schemas from 'src/schemas'
 import { logger, validate } from '../../helpers'
 
-export const router = express.Router()
+const router = Router()
 
 const todos = [
   { id: '1', title: 'Todo 1' },
@@ -11,7 +11,7 @@ const todos = [
 ]
 
 const get = async (req: Request, res: Response) => {
-  return res.send(todos)
+  res.send(todos)
 }
 
 const post = async (req: Request, res: Response) => {
@@ -21,11 +21,13 @@ const post = async (req: Request, res: Response) => {
     logger.error(error)
   }
 
-  return res.send({
+  res.send({
     message: 'Todo created',
     res: req.body,
   })
 }
 
-router.get(Routes.TODO, get)
-router.post(Routes.TODO, validate(Schemas.TodoSchema), post)
+router.get('/todos', get)
+router.post('/todos', validate(Schemas.TodoSchema), post)
+
+export default router

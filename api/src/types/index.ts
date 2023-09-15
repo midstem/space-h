@@ -1,5 +1,5 @@
-export enum Routes {
-  HOME = '/',
-  TODO = '/todos',
-  DOC = '/doc',
+export const Routes = {
+  HOME: '/',
+  TODO: '/todos',
+  DOC: '/doc',
 }
