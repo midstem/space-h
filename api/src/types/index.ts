@@ -1,5 +1,5 @@
-export const Routes = {
-  HOME: '/',
-  TODO: '/todos',
-  DOC: '/doc',
+export const ROUTES = {
+  home: '/',
+  todo: '/todos',
+  doc: '/doc',
 }

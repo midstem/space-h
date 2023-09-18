@@ -1,17 +1,14 @@
-import swaggerAutogen from 'swagger-autogen'
-
-const doc = {
-  info: {
-    title: 'My API',
-    description: 'Description',
+export const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      version: '1.0.0',
+      title: 'SpaceH API',
+      description: 'This api is for SpaceH',
+      contact: {
+        name: 'Anatolii Olshevskyi',
+      },
+      servers: ['http://localhost:8080'],
+    },
   },
-  host: 'localhost:8080',
+  apis: ['src/app.ts', 'src/controllers/**/*.ts'],
 }
-
-const outputFile = './swagger-output.json'
-const endpointsFiles = ['src/routes/index.ts']
-
-/* NOTE: If you are using the express Router, you must pass in the 'routes' only the 
-root file where the route starts, such as index.js, app.js, routes.js, etc ... */
-
-swaggerAutogen()(outputFile, endpointsFiles, doc)
