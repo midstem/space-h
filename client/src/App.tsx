@@ -23,7 +23,7 @@ const App = (): JSX.Element => {
     Error,
     InferRequestType<typeof $post>['form']
   >(
-    async todo => {
+    async (todo) => {
       const res = await $post({
         form: todo,
       })
@@ -34,7 +34,7 @@ const App = (): JSX.Element => {
       onSuccess: async () => {
         queryClient.invalidateQueries({ queryKey: ['todos'] })
       },
-      onError: error => {
+      onError: (error) => {
         console.log(error)
       },
     },
@@ -54,7 +54,7 @@ const App = (): JSX.Element => {
       </button>
 
       <ul>
-        {query.data?.todos.map(todo => <li key={todo.id}>{todo.title}</li>)}
+        {query.data?.todos.map((todo) => <li key={todo.id}>{todo.title}</li>)}
       </ul>
     </div>
   )
