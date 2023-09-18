@@ -1,41 +1,43 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { InferRequestType, InferResponseType, hc } from 'hono/client'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import './App.css'
 
 const client = hc<any>('http://localhost:3000/')
 
-const App = () => {
+const App = (): JSX.Element => {
   const queryClient = useQueryClient()
-  
+
   const query = useQuery({
     queryKey: ['todos'],
     queryFn: async () => {
       const res = await client.todos.$get()
+
       return await res.json()
     },
   })
 
-  const $post = client.todo.$post
+  const { $post } = client.todo
 
   const mutation = useMutation<
     InferResponseType<typeof $post>,
     Error,
     InferRequestType<typeof $post>['form']
   >(
-    async (todo) => {
+    async todo => {
       const res = await $post({
         form: todo,
       })
+
       return await res.json()
     },
     {
       onSuccess: async () => {
         queryClient.invalidateQueries({ queryKey: ['todos'] })
       },
-      onError: (error) => {
+      onError: error => {
         console.log(error)
       },
-    }
+    },
   )
 
   return (
@@ -52,9 +54,7 @@ const App = () => {
       </button>
 
       <ul>
-        {query.data?.todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
-        ))}
+        {query.data?.todos.map(todo => <li key={todo.id}>{todo.title}</li>)}
       </ul>
     </div>
   )
