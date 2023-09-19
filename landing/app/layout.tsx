@@ -1,6 +1,7 @@
+import localFont from 'next/font/local'
+import type { Metadata } from 'next'
 import StyledComponentsRegistry from 'lib/registry'
 import Providers from 'app/providers'
-import localFont from 'next/font/local'
 
 const font = localFont({
   src: [
@@ -42,7 +43,7 @@ const font = localFont({
   ],
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'SpaceH',
   description: `SpaceH - the tool to keep all information about your team, in one single place`,
 }
