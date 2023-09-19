@@ -2,15 +2,14 @@
 // @ts-nocheck
 'use client'
 
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import { useServerInsertedHTML } from 'next/navigation'
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+import { ChildrenProp } from 'src/types'
 
 export const StyledComponentRegistry = ({
   children,
-}: {
-  children: ReactNode
-}): JSX.Element => {
+}: ChildrenProp): JSX.Element => {
   const [styleSheet] = useState(() => new ServerStyleSheet())
 
   useServerInsertedHTML(() => {

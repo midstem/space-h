@@ -16,8 +16,6 @@ export const HomeWrapper = styled.main(
   `,
 )
 
-// LEFT COLUMN
-
 export const LeftColumn = styled(FlexColumn)(
   ({ theme }) => css`
     flex: 1;
@@ -53,8 +51,6 @@ export const Description = styled.p(
     }
   `,
 )
-
-// RIGHT COLUMN
 
 export const RightColumn = styled(FlexColumn)(
   ({ theme }) => css`

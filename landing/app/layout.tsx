@@ -2,8 +2,9 @@ import localFont from 'next/font/local'
 import type { Metadata } from 'next'
 import StyledComponentsRegistry from 'lib/registry'
 import Providers from 'app/providers'
+import { ChildrenProp } from 'src/types'
 
-const font = localFont({
+const fonts = localFont({
   src: [
     {
       path: '../public/static/fonts/GTWalsheimPro-Light.woff2',
@@ -48,14 +49,10 @@ export const metadata: Metadata = {
   description: `SpaceH - the tool to keep all information about your team, in one single place`,
 }
 
-const RootLayout = ({
-  children,
-}: {
-  children: React.ReactNode
-}): JSX.Element => {
+const RootLayout = ({ children }: ChildrenProp): JSX.Element => {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={fonts.className}>
         <StyledComponentsRegistry>
           <Providers>{children}</Providers>
         </StyledComponentsRegistry>
