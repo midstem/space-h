@@ -8,7 +8,7 @@ const GlobalStyle = styled.createGlobalStyle(
     body {
       background-color: ${theme.colors.black[1000]};
       font-family:
-        'Sora',
+        'GT Walsheim Pro',
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
