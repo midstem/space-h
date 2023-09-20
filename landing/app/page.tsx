@@ -1,24 +1,23 @@
 import Image from 'next/image'
-import {
-  HomeWrapper,
-  LeftColumn,
-  MainHeader,
-  Description,
-  RightColumn,
-  Quote,
-} from 'app/styles'
 
 const Home = (): JSX.Element => (
-  <HomeWrapper>
-    <LeftColumn>
-      <MainHeader>Hi there, this is SpaceH!</MainHeader>
-      <Description>
+  <div className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0 ">
+    <div className="flex flex-1 flex-col items-center justify-center pt-10">
+      <h1 className="px-4 text-4xl font-medium text-center md:text-5xl">
+        Hi there, this is SpaceH!
+      </h1>
+      <p className="text-center pb-0 px-4 pt-3 max-w-lg text-lg md:text-2xl">
         We are coming soon! The tool to keep all information about your team, in
         one single place
-      </Description>
-    </LeftColumn>
-    <RightColumn>
-      <Quote>
+      </p>
+    </div>
+    <div
+      className="flex flex-1 flex-col justify-end min-h-400 bg-cover bg-no-repeat bg-center-35"
+      style={{
+        backgroundImage: "url('/static/images/astronaut.png')",
+      }}
+    >
+      <div className="flex flex-col max-w-xl mb-10 py-7 gap-4 text-4xl px-4">
         <Image
           src="/static/icons/quotes.svg"
           alt="quote"
@@ -26,9 +25,9 @@ const Home = (): JSX.Element => (
           height={40}
         />
         <p>Go anywhere you want in a Galaxy full of wonders</p>
-      </Quote>
-    </RightColumn>
-  </HomeWrapper>
+      </div>
+    </div>
+  </div>
 )
 
 export default Home

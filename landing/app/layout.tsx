@@ -1,8 +1,8 @@
 import localFont from 'next/font/local'
 import type { Metadata } from 'next'
-import StyledComponentsRegistry from 'lib/registry'
 import Providers from 'app/providers'
 import { ChildrenProp } from 'src/types'
+import './globals.css'
 
 const fonts = localFont({
   src: [
@@ -53,9 +53,7 @@ const RootLayout = ({ children }: ChildrenProp): JSX.Element => {
   return (
     <html lang="en">
       <body className={fonts.className}>
-        <StyledComponentsRegistry>
-          <Providers>{children}</Providers>
-        </StyledComponentsRegistry>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
