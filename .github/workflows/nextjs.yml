@@ -28,7 +28,7 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    env: 
+    env:
       working-directory: ./landing
     defaults:
       run:
@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Bun
-      uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v1
       - name: Install dependencies
         run: Bun install
         working-directory: ${{env.working-directory}}
