@@ -1,8 +1,8 @@
 import Image from 'next/image'
 
 const Home = (): JSX.Element => (
-  <div className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0 ">
-    <div className="flex flex-1 flex-col items-center justify-center pt-10">
+  <main className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0 ">
+    <section className="flex flex-1 flex-col items-center justify-center pt-10">
       <h1 className="px-4 text-4xl font-medium text-center md:text-5xl">
         Hi there, this is SpaceH!
       </h1>
@@ -10,8 +10,8 @@ const Home = (): JSX.Element => (
         We are coming soon! The tool to keep all information about your team, in
         one single place
       </p>
-    </div>
-    <div
+    </section>
+    <section
       className="flex flex-1 flex-col justify-end min-h-400 bg-cover bg-no-repeat bg-center-35"
       style={{
         backgroundImage: "url('/static/images/astronaut.png')",
@@ -26,8 +26,8 @@ const Home = (): JSX.Element => (
         />
         <p>Go anywhere you want in a Galaxy full of wonders</p>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 )
 
 export default Home
