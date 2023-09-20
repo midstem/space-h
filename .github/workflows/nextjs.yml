@@ -30,6 +30,9 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       working-directory: ./landing
+    defaults:
+      run:
+        working-directory: ${{ env.working-directory }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -40,7 +43,6 @@ jobs:
         working-directory: ${{env.working-directory}}
       - name: Build
         run: Bun build
-        working-directory: ${{env.working-directory}}
       - name: Setup Pages
         uses: actions/configure-pages@v3
         with:
@@ -61,13 +63,10 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-        working-directory: ${{env.working-directory}}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-        working-directory: ${{env.working-directory}}
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
-        working-directory: ${{env.working-directory}}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
