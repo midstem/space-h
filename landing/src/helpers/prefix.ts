@@ -1,3 +1,3 @@
-const prefix = process.env.BASE_PATH || ''
+const PREFIX = process.env.BASE_PATH || ''
 
-export { prefix }
+export { PREFIX }

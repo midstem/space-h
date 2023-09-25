@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: ChildrenProp): JSX.Element => {
   return (
     <html lang="en">
-      <body className={fonts.className}>
+      <body className={`${fonts.className} bg-black`}>
         <Providers>{children}</Providers>
       </body>
     </html>
