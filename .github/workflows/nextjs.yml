@@ -2,7 +2,7 @@ name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: ["4-fe-move-landing-to-nextjs"]
+    branches: ["main"]
 
   workflow_dispatch:
 
