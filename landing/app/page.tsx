@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { PREFIX } from 'src/helpers/prefix'
 
 const Home = (): JSX.Element => (
   <main className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0 ">
@@ -15,12 +14,12 @@ const Home = (): JSX.Element => (
     <section
       className="flex flex-1 flex-col justify-end min-h-400 bg-cover bg-no-repeat bg-center-35"
       style={{
-        backgroundImage: `url('${PREFIX}/static/images/astronaut.png')`,
+        backgroundImage: "url('/static/images/astronaut.png')",
       }}
     >
       <div className="flex flex-col max-w-xl mb-10 py-7 gap-4 text-4xl px-4">
         <Image
-          src={`${PREFIX}/static/icons/quotes.svg`}
+          src="/static/icons/quotes.svg"
           alt="quote"
           width={40}
           height={40}
