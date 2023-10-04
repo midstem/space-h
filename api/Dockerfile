@@ -2,9 +2,7 @@ FROM oven/bun
 
 WORKDIR /app
 
-COPY package.json package.json
-COPY bun.lockb bun.lockb
-COPY tsconfig.json tsconfig.json
+COPY package.json bun.lockb tsconfig.json ./
 
 RUN bun install
 
