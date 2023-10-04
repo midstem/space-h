@@ -11,13 +11,14 @@ const Home = (): JSX.Element => (
         one single place
       </p>
     </section>
-    <section
-      className="flex flex-1 flex-col justify-end min-h-400 bg-cover bg-no-repeat bg-center-35"
-      style={{
-        backgroundImage: "url('/static/images/astronaut.png')",
-      }}
-    >
-      <div className="flex flex-col max-w-xl mb-10 py-7 gap-4 text-4xl px-4">
+    <section className="flex flex-1 flex-col justify-end min-h-400 relative">
+      <Image
+        className="object-cover object-center-35"
+        alt="astronaut"
+        src="/static/images/astronaut.png"
+        fill
+      />
+      <div className="flex flex-col max-w-xl mb-10 py-7 gap-4 text-4xl px-4 z-10">
         <Image
           src="/static/icons/quotes.svg"
           alt="quote"
