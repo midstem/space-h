@@ -10,7 +10,7 @@ import { Request, Response } from 'express'
  *        description: A successful response
  */
 const get = (req: Request, res: Response) => {
-  res.send('Hello express!')
+  res.send('Hello express 00:48')
 }
 
 export default { get }
