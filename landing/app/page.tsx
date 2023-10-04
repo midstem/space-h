@@ -15,7 +15,7 @@ const Home = (): JSX.Element => (
       <Image
         className="object-cover object-center-35"
         alt="astronaut"
-        src="/static/images/astronaut.png"
+        src="/static/images/astronaut.jpg"
         fill
       />
       <div className="flex flex-col max-w-xl mb-10 py-7 gap-4 text-4xl px-4 z-10">
