@@ -1,9 +1,11 @@
 FROM oven/bun
 
-ADD src src
-ADD package.json package.json
-ADD bun.lockb bun.lockb
-ADD tsconfig.json tsconfig.json
+WORKDIR /app
+
+COPY package.json package.json
+COPY bun.lockb bun.lockb
+COPY tsconfig.json tsconfig.json
+
 RUN bun install
 
 EXPOSE 8080
