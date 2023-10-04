@@ -1,10 +1,10 @@
 import express from 'express'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsDoc from 'swagger-jsdoc'
-import { logger } from 'src/helpers'
 import router from 'src/routes'
 import { ROUTES } from 'src/types'
-import { swaggerOptions } from 'swagger'
+import { logger } from 'src/helpers'
+import { swaggerOptions } from 'src/swagger'
 
 const port = process.env.PORT || 8080
 const app = express()
