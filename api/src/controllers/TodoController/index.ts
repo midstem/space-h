@@ -1,11 +1,7 @@
 import { Request, Response } from 'express'
 import { pool } from 'db'
+import { ROUTES } from 'src/types'
 import { logger } from '../../helpers'
-
-const todos = [
-  { id: '1', title: 'Todo 1' },
-  { id: '2', title: 'Todo 2' },
-]
 
 /**
  * @swagger
@@ -36,7 +32,7 @@ const todos = [
 const get = async (req: Request, res: Response) => {
   pool.query('SELECT * FROM todos', (err, rows) => {
     if (err) throw err
-    console.log('Data received todos db:', rows)
+    logger.log('Data received todos db:', rows)
 
     res.send(rows)
   })
@@ -59,8 +55,6 @@ const get = async (req: Request, res: Response) => {
  *         schema:
  *           type: object
  *           properties:
- *             id:
- *               type: string
  *             title:
  *               type: string
  *     responses:
@@ -74,22 +68,19 @@ const get = async (req: Request, res: Response) => {
  *             res:
  *               type: object
  *               properties:
- *                 id:
- *                   type: string
  *                 title:
  *                   type: string
  */
 const post = async (req: Request, res: Response) => {
+  const { title } = req.body
   try {
-    todos.push(req.body)
+    pool.query('INSERT INTO todos (title) VALUES (?)', [title], (err) => {
+      if (err) return logger.log(err)
+      res.redirect(ROUTES.todos)
+    })
   } catch (error) {
     logger.error(error)
   }
-
-  res.send({
-    message: 'Todo created',
-    res: req.body,
-  })
 }
 
 /**
@@ -127,8 +118,6 @@ const post = async (req: Request, res: Response) => {
  *             todo:
  *               type: object
  *               properties:
- *                 id:
- *                   type: string
  *                 title:
  *                   type: string
  *       404:
@@ -139,14 +128,16 @@ const post = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
   const { id } = req.params
   const { title } = req.body
-  const todo = todos.find((t) => t.id === id)
-
-  if (!todo) {
-    return res.status(404).send({ message: 'Todo not found' })
+  try {
+    pool.query('UPDATE todos SET title=? WHERE id=?', [title, id], (err) => {
+      if (err) return logger.log(err)
+      res
+        .status(200)
+        .json({ message: 'Todo updated successfully', todo: { id, title } })
+    })
+  } catch (error) {
+    logger.error(error)
   }
-
-  todo.title = title
-  res.send({ message: 'Todo updated', todo })
 }
 
 /**
@@ -174,14 +165,16 @@ const update = async (req: Request, res: Response) => {
  */
 const remove = async (req: Request, res: Response) => {
   const { id } = req.params
-  const index = todos.findIndex((todo) => todo.id === id)
-
-  if (index === -1) {
-    return res.status(404).send({ message: 'Todo not found' })
+  try {
+    pool.query('DELETE FROM todos WHERE id=?', [id], (err) => {
+      if (err) return logger.log(err)
+      res
+        .status(200)
+        .json({ message: `Todo with id ${id} updated successfully` })
+    })
+  } catch (error) {
+    logger.error(error)
   }
-
-  todos.splice(index, 1)
-  res.send({ message: 'Todo deleted' })
 }
 
 export default { get, post, update, remove }
