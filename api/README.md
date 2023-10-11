@@ -4,6 +4,10 @@
 
     docker-compose up 
 
+### Open 
+
+    http://localhost:8080/doc/
+
 ### To stop 
 
     docker-compose down

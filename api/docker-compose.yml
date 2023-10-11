@@ -16,6 +16,8 @@ services:
     depends_on:
       - mysqldb
     build: ./
+    links:
+      - mysqldb
     command: bun s
     volumes:
       - .:/app

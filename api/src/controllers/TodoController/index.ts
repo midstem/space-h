@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { pool } from 'db'
 import { logger } from '../../helpers'
 
 const todos = [
@@ -33,7 +34,12 @@ const todos = [
  *         description: Internal server error
  */
 const get = async (req: Request, res: Response) => {
-  res.send(todos)
+  pool.query('SELECT * FROM todos', (err, rows) => {
+    if (err) throw err
+    console.log('Data received todos db:', rows)
+
+    res.send(rows)
+  })
 }
 
 /**
