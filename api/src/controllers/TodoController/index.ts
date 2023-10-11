@@ -24,6 +24,8 @@ import { logger } from '../../helpers'
  *                 type: string
  *               title:
  *                 type: string
+ *               completed:
+ *                 type: boolean
  *       400:
  *         description: Bad request
  *       500:
@@ -57,6 +59,8 @@ const get = async (req: Request, res: Response) => {
  *           properties:
  *             title:
  *               type: string
+ *             completed:
+ *               type: boolean
  *     responses:
  *       200:
  *         description: Todo created successfully
@@ -70,14 +74,20 @@ const get = async (req: Request, res: Response) => {
  *               properties:
  *                 title:
  *                   type: string
+ *                 completed:
+ *                   type: boolean
  */
 const post = async (req: Request, res: Response) => {
-  const { title } = req.body
+  const { title, completed = false } = req.body
   try {
-    pool.query('INSERT INTO todos (title) VALUES (?)', [title], (err) => {
-      if (err) return logger.log(err)
-      res.redirect(ROUTES.todos)
-    })
+    pool.query(
+      'INSERT INTO todos (title, completed) VALUES (?, ?)',
+      [title, completed],
+      (err) => {
+        if (err) return logger.log(err)
+        res.redirect(ROUTES.todos)
+      },
+    )
   } catch (error) {
     logger.error(error)
   }
@@ -98,8 +108,8 @@ const post = async (req: Request, res: Response) => {
  *         in: path
  *         required: true
  *         type: string
- *       - name: title
- *         description: Updated title of the todo
+ *       - name: todo
+ *         description: Updated todo object
  *         in: body
  *         required: true
  *         schema:
@@ -107,6 +117,8 @@ const post = async (req: Request, res: Response) => {
  *           properties:
  *             title:
  *               type: string
+ *             completed:
+ *               type: boolean
  *     responses:
  *       200:
  *         description: Todo updated successfully
@@ -118,23 +130,28 @@ const post = async (req: Request, res: Response) => {
  *             todo:
  *               type: object
  *               properties:
+ *                 id:
+ *                   type: string
  *                 title:
  *                   type: string
- *       404:
- *         description: Todo not found
- *       500:
- *         description: Internal server error
+ *                 completed:
+ *                   type: boolean
  */
 const update = async (req: Request, res: Response) => {
   const { id } = req.params
-  const { title } = req.body
+  const { title, completed } = req.body
   try {
-    pool.query('UPDATE todos SET title=? WHERE id=?', [title, id], (err) => {
-      if (err) return logger.log(err)
-      res
-        .status(200)
-        .json({ message: 'Todo updated successfully', todo: { id, title } })
-    })
+    pool.query(
+      'UPDATE todos SET title=?, completed=? WHERE id=?',
+      [title, completed, id],
+      (err) => {
+        if (err) return logger.log(err)
+        res.status(200).json({
+          message: 'Todo updated successfully',
+          todo: { id, title, completed },
+        })
+      },
+    )
   } catch (error) {
     logger.error(error)
   }
