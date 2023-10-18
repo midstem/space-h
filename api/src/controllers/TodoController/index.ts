@@ -147,7 +147,7 @@ const update = async (req: Request, res: Response) => {
       (err) => {
         if (err) return logger.log(err)
         res.status(200).json({
-          message: 'Todo updated successfully',
+          message: 'Todo updated successfully test-1',
           todo: { id, title, completed },
         })
       },
