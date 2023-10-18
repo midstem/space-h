@@ -187,7 +187,7 @@ const remove = async (req: Request, res: Response) => {
       if (err) return logger.log(err)
       res
         .status(200)
-        .json({ message: `Todo with id ${id} updated successfully` })
+        .json({ message: `Todo with id ${id} updated successfully target` })
     })
   } catch (error) {
     logger.error(error)
