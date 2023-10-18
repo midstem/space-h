@@ -34,7 +34,7 @@ import { logger } from '../../helpers'
 const get = async (req: Request, res: Response) => {
   pool.query('SELECT * FROM todos', (err, rows) => {
     if (err) throw err
-    logger.log('Data received todos db:', rows)
+    logger.log('Data received todos db: test-2', rows)
 
     res.send(rows)
   })
