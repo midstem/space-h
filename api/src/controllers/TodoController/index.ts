@@ -175,7 +175,7 @@ const remove = async (req: Request, res: Response) => {
   }
 
   todos.splice(index, 1)
-  res.send({ message: 'Todo deleted' })
+  res.send({ message: 'Todo deleted!' })
 }
 
 export default { get, post, update, remove }
