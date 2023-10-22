@@ -7,6 +7,4 @@ export const todoSchema = z.object({
   }),
 })
 
-
-
 export type TodoSchemaType = z.infer<typeof todoSchema>
