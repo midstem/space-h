@@ -1,6 +1,6 @@
 up:
 	docker-compose up
-up-build:
+up-b:
 	docker-compose up --build
 down:
 	docker-compose down
