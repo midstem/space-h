@@ -1,13 +1,11 @@
-FROM node:18-alpine
+FROM node:19.0.0-bullseye-slim
 
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json yarn.lock ./
 
 RUN yarn install && yarn cache clean
 
 COPY . .
 
-EXPOSE 3000
-
-CMD ["yarn", "s"]
+CMD yarn s

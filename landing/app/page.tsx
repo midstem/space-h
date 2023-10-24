@@ -4,7 +4,7 @@ const Home = (): JSX.Element => (
   <main className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0 ">
     <section className="flex flex-1 flex-col items-center justify-center pt-10">
       <h1 className="px-4 text-4xl font-medium text-center md:text-5xl">
-        Hi there, this is SpaceH!
+        Hi there, this is Space H!
       </h1>
       <p className="text-center pb-0 px-4 pt-3 max-w-lg text-lg md:text-2xl">
         We are coming soon! The tool to keep all information about your team, in
