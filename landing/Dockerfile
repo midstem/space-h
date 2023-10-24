@@ -1,13 +1,13 @@
-FROM oven/bun:latest
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json bun.lockb tsconfig.json ./
+COPY package.json ./
 
-RUN bun install
+RUN yarn install && yarn cache clean
 
 COPY . .
 
 EXPOSE 3000
 
-CMD bun s
+CMD ["yarn", "s"]
