@@ -1,5 +1,7 @@
 name: Deploy
 
+run-name: ${{ github.ref }}
+
 on:
   push:
     branches:
@@ -7,8 +9,13 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
+
 jobs:
-  Development_Deploy:
+  deploy-development:
     name: Build and deploy for Development
     if: github.event.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
@@ -17,9 +24,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
       - name: Set up bun
         uses: oven-sh/setup-bun@v1
       - name: Install and Build
@@ -27,7 +34,7 @@ jobs:
       - name: Deploy
         run: aws s3 sync ./landing/out s3://devhr.midstem.net
 
-  Stage_Deploy:
+  deploy-stage:
     name: Build and deploy for Stage
     if: github.event.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -36,9 +43,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
       - name: Set up bun
         uses: oven-sh/setup-bun@v1
       - name: Install and Build
@@ -46,7 +53,7 @@ jobs:
       - name: Deploy
         run: aws s3 sync ./landing/out s3://stagehr.midstem.net
 
-  Prod_Deploy:
+  deploy-production:
     name: Build and deploy for Production
     if: github.event.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
@@ -55,9 +62,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
       - name: Set up bun
         uses: oven-sh/setup-bun@v1
       - name: Install and Build
