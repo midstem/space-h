@@ -1,32 +1,28 @@
 version: '3.8'
 
 services:
-  # mysqldb:
-  #   image: mysql:latest
-  #   env_file: .env
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-  #     - MYSQL_DATABASE=$MYSQLDB_DATABASE
-  #   ports:
-  #     - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-  #   volumes:
-  #     - db:/var/lib/mysql
+  mysqldb:
+    build: ./db
+    environment: 
+      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_USER=$DB_USER
+      - MYSQL_PASSWORD=$DB_PASSWORD
+      - MYSQL_ROOT_PASSWORD=$DB_ROOT_PASSWORD
+    volumes:
+      - db:/var/lib/mysql
+    ports: 
+      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
   app:
-    # depends_on:
-    #   - mysqldb
+    depends_on:
+      - mysqldb
     build: ./
+    links:
+      - mysqldb
     command: bun s
-    env_file: .env
     volumes:
       - .:/app
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
-    # environment:
-    #   - DB_HOST=mysqldb
-    #   - DB_USER=$MYSQLDB_USER
-    #   - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-    #   - DB_NAME=$MYSQLDB_DATABASE
-    #   - DB_PORT=$MYSQLDB_DOCKER_PORT
     stdin_open: true
     tty: true
 

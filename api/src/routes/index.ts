@@ -9,9 +9,9 @@ const router = express.Router()
 
 router.get(ROUTES.home, HomeController.get)
 
-router.get(ROUTES.todo, TodoController.get)
-router.post(ROUTES.todo, validate(Schemas.todoSchema), TodoController.post)
-router.delete(`${ROUTES.todo}/:id`, TodoController.remove)
-router.put(`${ROUTES.todo}/:id`, TodoController.update)
+router.get(ROUTES.todos, TodoController.get)
+router.post(ROUTES.todos, validate(Schemas.todoSchema), TodoController.post)
+router.delete(`${ROUTES.todos}/:id`, TodoController.remove)
+router.put(`${ROUTES.todos}/:id`, TodoController.update)
 
 export default router

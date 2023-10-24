@@ -1,10 +1,7 @@
 import { Request, Response } from 'express'
+import { pool } from 'db'
+import { ROUTES } from 'src/types'
 import { logger } from '../../helpers'
-
-const todos = [
-  { id: '1', title: 'Todo 1' },
-  { id: '2', title: 'Todo 2' },
-]
 
 /**
  * @swagger
@@ -27,13 +24,20 @@ const todos = [
  *                 type: string
  *               title:
  *                 type: string
+ *               completed:
+ *                 type: boolean
  *       400:
  *         description: Bad request
  *       500:
  *         description: Internal server error
  */
 const get = async (req: Request, res: Response) => {
-  res.send(todos)
+  pool.query('SELECT * FROM todos', (err, rows) => {
+    if (err) throw err
+    logger.log('Data received todos db: test-2', rows)
+
+    res.send(rows)
+  })
 }
 
 /**
@@ -53,10 +57,10 @@ const get = async (req: Request, res: Response) => {
  *         schema:
  *           type: object
  *           properties:
- *             id:
- *               type: string
  *             title:
  *               type: string
+ *             completed:
+ *               type: boolean
  *     responses:
  *       200:
  *         description: Todo created successfully
@@ -68,22 +72,25 @@ const get = async (req: Request, res: Response) => {
  *             res:
  *               type: object
  *               properties:
- *                 id:
- *                   type: string
  *                 title:
  *                   type: string
+ *                 completed:
+ *                   type: boolean
  */
 const post = async (req: Request, res: Response) => {
+  const { title, completed = false } = req.body
   try {
-    todos.push(req.body)
+    pool.query(
+      'INSERT INTO todos (title, completed) VALUES (?, ?)',
+      [title, completed],
+      (err) => {
+        if (err) return logger.log(err)
+        res.redirect(ROUTES.todos)
+      },
+    )
   } catch (error) {
     logger.error(error)
   }
-
-  res.send({
-    message: 'Todo created',
-    res: req.body,
-  })
 }
 
 /**
@@ -101,8 +108,8 @@ const post = async (req: Request, res: Response) => {
  *         in: path
  *         required: true
  *         type: string
- *       - name: title
- *         description: Updated title of the todo
+ *       - name: todo
+ *         description: Updated todo object
  *         in: body
  *         required: true
  *         schema:
@@ -110,6 +117,8 @@ const post = async (req: Request, res: Response) => {
  *           properties:
  *             title:
  *               type: string
+ *             completed:
+ *               type: boolean
  *     responses:
  *       200:
  *         description: Todo updated successfully
@@ -125,22 +134,27 @@ const post = async (req: Request, res: Response) => {
  *                   type: string
  *                 title:
  *                   type: string
- *       404:
- *         description: Todo not found
- *       500:
- *         description: Internal server error
+ *                 completed:
+ *                   type: boolean
  */
 const update = async (req: Request, res: Response) => {
   const { id } = req.params
-  const { title } = req.body
-  const todo = todos.find((t) => t.id === id)
-
-  if (!todo) {
-    return res.status(404).send({ message: 'Todo not found' })
+  const { title, completed } = req.body
+  try {
+    pool.query(
+      'UPDATE todos SET title=?, completed=? WHERE id=?',
+      [title, completed, id],
+      (err) => {
+        if (err) return logger.log(err)
+        res.status(200).json({
+          message: 'Todo updated successfully test-1',
+          todo: { id, title, completed },
+        })
+      },
+    )
+  } catch (error) {
+    logger.error(error)
   }
-
-  todo.title = title
-  res.send({ message: 'Todo updated', todo })
 }
 
 /**
@@ -168,14 +182,16 @@ const update = async (req: Request, res: Response) => {
  */
 const remove = async (req: Request, res: Response) => {
   const { id } = req.params
-  const index = todos.findIndex((todo) => todo.id === id)
-
-  if (index === -1) {
-    return res.status(404).send({ message: 'Todo not found' })
+  try {
+    pool.query('DELETE FROM todos WHERE id=?', [id], (err) => {
+      if (err) return logger.log(err)
+      res
+        .status(200)
+        .json({ message: `Todo with id ${id} updated successfully target` })
+    })
+  } catch (error) {
+    logger.error(error)
   }
-
-  todos.splice(index, 1)
-  res.send({ message: 'Todo deleted!' })
 }
 
 export default { get, post, update, remove }
