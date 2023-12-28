@@ -2,7 +2,7 @@
 
 ### How to set up application locally
 
-    docker-compose up 
+    docker compose up 
 
 ### Open 
 
@@ -10,7 +10,7 @@
 
 ### To stop 
 
-    docker-compose down
+    docker compose down
 
 #
 
