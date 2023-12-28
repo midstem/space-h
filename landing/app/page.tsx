@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 const Home = (): JSX.Element => (
-  <main className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0 ">
+  <main className="flex h-screen text-white flex-col gap-1.5 lg:flex-row lg:gap-0">
     <section className="flex flex-1 flex-col items-center justify-center pt-10">
       <h1 className="px-4 text-4xl font-medium text-center md:text-5xl">
         Hi there, this is SpaceH!
