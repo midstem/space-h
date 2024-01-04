@@ -40,3 +40,7 @@ yarn-error.log*
 **/*.log
 package-lock.json
 **/*.bun
+
+dev.db
+dev.db-journal
+script.ts
