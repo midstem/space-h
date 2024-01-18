@@ -1,7 +1,8 @@
+import { eq } from 'drizzle-orm'
 import { Request, Response } from 'express'
-import { pool } from 'db'
+import { db } from 'src/db'
+import { todos } from 'src/db/schema/todo'
 import { ROUTES } from 'src/types'
-import { logger } from '../../helpers'
 
 /**
  * @swagger
@@ -32,12 +33,12 @@ import { logger } from '../../helpers'
  *         description: Internal server error
  */
 const get = async (req: Request, res: Response) => {
-  pool.query('SELECT * FROM todos', (err, rows) => {
-    if (err) throw err
-    logger.log('Data received todos db: test-2', rows)
-
+  try {
+    const rows = await db.select().from(todos)
     res.send(rows)
-  })
+  } catch (err) {
+    res.status(500).send(err)
+  }
 }
 
 /**
@@ -80,16 +81,10 @@ const get = async (req: Request, res: Response) => {
 const post = async (req: Request, res: Response) => {
   const { title, completed = false } = req.body
   try {
-    pool.query(
-      'INSERT INTO todos (title, completed) VALUES (?, ?)',
-      [title, completed],
-      (err) => {
-        if (err) return logger.log(err)
-        res.redirect(ROUTES.todos)
-      },
-    )
+    await db.insert(todos).values([{ title, completed }])
+    res.redirect(ROUTES.todos)
   } catch (error) {
-    logger.error(error)
+    res.status(500).send(error)
   }
 }
 
@@ -141,19 +136,17 @@ const update = async (req: Request, res: Response) => {
   const { id } = req.params
   const { title, completed } = req.body
   try {
-    pool.query(
-      'UPDATE todos SET title=?, completed=? WHERE id=?',
-      [title, completed, id],
-      (err) => {
-        if (err) return logger.log(err)
-        res.status(200).json({
-          message: 'Todo updated successfully test-1',
-          todo: { id, title, completed },
-        })
-      },
-    )
+    await db
+      .update(todos)
+      .set({ title, completed })
+      .where(eq(todos.id, Number(id)))
+
+    res.status(200).json({
+      message: 'Todo updated successfully test-1',
+      todo: { id, title, completed },
+    })
   } catch (error) {
-    logger.error(error)
+    res.status(500).send(error)
   }
 }
 
@@ -183,14 +176,10 @@ const update = async (req: Request, res: Response) => {
 const remove = async (req: Request, res: Response) => {
   const { id } = req.params
   try {
-    pool.query('DELETE FROM todos WHERE id=?', [id], (err) => {
-      if (err) return logger.log(err)
-      res
-        .status(200)
-        .json({ message: `Todo with id ${id} updated successfully target` })
-    })
+    await db.delete(todos).where(eq(todos.id, Number(id)))
+    res.status(200).json({ message: `Todo with id ${id} deleted successfully` })
   } catch (error) {
-    logger.error(error)
+    res.status(500).send(error)
   }
 }
 
