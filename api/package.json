@@ -5,7 +5,9 @@
     "dev": "bun run --watch src/app.ts",
     "s": "bun run --watch src/app.ts",
     "start": "bun run src/app.ts",
-    "swagger": "bun ./swagger.ts"
+    "swagger": "bun ./swagger.ts",
+    "migration:generate": "drizzle-kit generate:mysql",
+    "migration:push": "bun run src/migrate.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.29.3",
