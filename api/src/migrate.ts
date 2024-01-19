@@ -4,3 +4,5 @@ import { db, connection } from './db'
 await migrate(db, { migrationsFolder: './drizzle' })
 
 await connection.end()
+
+console.log(`Migration complete`)
