@@ -2,7 +2,7 @@ import express from 'express'
 import HomeController from 'src/controllers/HomeController'
 import TodoController from 'src/controllers/TodoController'
 import { validate } from 'src/helpers'
-import * as Schemas from 'src/schemas/todoSchema'
+import * as Schemas from 'src/validations/todoValidation'
 import { ROUTES } from 'src/types'
 
 const router = express.Router()

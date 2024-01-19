@@ -53,3 +53,8 @@
     docker stop app
     docker stop mysql_db
 
+## Run migrations
+    docker exec -it api-app bun run db:migrate
+
+## Run seeds
+    docker exec -it api-app bun run db:seed

@@ -9,6 +9,7 @@
     "lint": "eslint --fix . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --fix --ext ts,tsx .",
     "preview": "vite preview"
+    
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.0",

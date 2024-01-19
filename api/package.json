@@ -5,9 +5,14 @@
     "dev": "bun run --watch src/app.ts",
     "s": "bun run --watch src/app.ts",
     "start": "bun run src/app.ts",
-    "swagger": "bun ./swagger.ts"
+    "swagger": "bun ./swagger.ts",
+    "db:generate": "drizzle-kit generate:mysql",
+    "db:introspect": "drizzle-kit introspect:mysql",
+    "db:migrate": "bun run src/migrate.ts",
+    "db:seed": "bun run src/db/seeds/index.ts"
   },
   "dependencies": {
+    "drizzle-orm": "^0.29.3",
     "express": "^4.18.2",
     "mysql2": "^3.6.1",
     "swagger-jsdoc": "^6.2.8",
@@ -21,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "bun-types": "latest",
+    "drizzle-kit": "^0.20.13",
     "eslint": "^8.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-preact": "^1.3.0",
