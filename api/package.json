@@ -8,8 +8,8 @@
     "swagger": "bun ./swagger.ts",
     "db:generate": "drizzle-kit generate:mysql",
     "db:introspect": "drizzle-kit introspect:mysql",
-    "db:push": "bun run src/migrate.ts",
-    "db:seeds": "bun run src/db/seeds/index.ts"
+    "db:migrate": "bun run src/migrate.ts",
+    "db:seed": "bun run src/db/seeds/index.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.29.3",
