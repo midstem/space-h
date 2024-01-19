@@ -52,8 +52,3 @@
 
     docker stop app
     docker stop mysql_db
-
-## Generate migration
-
-    bunx drizzle-kit generate:mysql
-
