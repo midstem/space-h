@@ -1,8 +1,6 @@
 import { migrate } from 'drizzle-orm/mysql2/migrator'
-import { db } from './db'
+import { db, connection } from './db'
 
-async function main() {
-  await migrate(db, { migrationsFolder: './drizzle' })
-}
+await migrate(db, { migrationsFolder: './drizzle' })
 
-main().catch(console.error)
+await connection.end()
